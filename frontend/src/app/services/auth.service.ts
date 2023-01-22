@@ -16,7 +16,7 @@ export class AuthService {
         variables: loginObj
       })
       .subscribe((res: any) => {
-        
+        resolve(res);
       })
     })
   }

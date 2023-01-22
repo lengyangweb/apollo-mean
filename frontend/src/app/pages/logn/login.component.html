@@ -6,7 +6,7 @@
                 <h2 class="mt-2" [style]="{'text-transform': 'uppercase', 'letter-spacing': '2px'}">{{ 'Login' }}</h2>
             </div>
             <div class="container px-4 my-4">
-                <form action="">
+                <form action="" [formGroup]="loginForm">
                     <div class="form-group">
                         <label for="username" class="form-label">Username:</label>
                         <input type="text" name="username" id="username" class="form-control">
