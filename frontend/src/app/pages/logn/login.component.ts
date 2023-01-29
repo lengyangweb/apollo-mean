@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,18 +12,18 @@ export class LoginComponent {
   displaySignUpForm: boolean = false;
   loginForm!: FormGroup;
 
-  constructor(private _auth: AuthService) {}
+  constructor(private _auth: AuthService, private _fb: FormBuilder) {}
 
   ngOnInit() {
     this.createForm();
   }
 
   createForm(): void {
-    this.loginForm = new FormGroup({
-      username: new FormControl(['', [Validators.required]]),
-      email: new FormControl(['', [Validators.required, Validators.email]]),
-      password: new FormControl(['', Validators.required])
-    });
+    this.loginForm = this._fb.group({
+      username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    })
   }
 
   displaySignUp(): void {
@@ -31,9 +31,16 @@ export class LoginComponent {
   }
 
   login() {
-    this._auth.login({})
+    this._auth.login(this.loginForm.value)
     .then(({ error, data, loading }: any) => {
-      console.log(data);
+
+      // if data is defined and has field signIn and loading is false
+      if (data && data.hasOwnProperty('signIn') && !loading) {
+
+        console.log(data);
+
+      }
+
     })
   }
 

@@ -17,8 +17,24 @@ export class AuthService {
       })
       .subscribe((res: any) => {
         resolve(res);
-      })
-    })
+      }, (error) => console.error(error));
+    });
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem('access-token', JSON.stringify(token));
+  }
+
+  setTokenExpired(expireTime: string): void {
+    localStorage.setItem('token-expiredIn', JSON.stringify(expireTime));
+  }
+
+  setRefreshToken(refreshToken: string): void {
+    localStorage.setItem('refresh-token', JSON.stringify(refreshToken));
+  }
+
+  logout(): void {
+
   }
 
 }

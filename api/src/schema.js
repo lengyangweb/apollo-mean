@@ -21,6 +21,11 @@ module.exports = gql`
         cursor: String!
         hasNextPage: Boolean!
     }
+    type Token {
+        accessToken: String!
+        refreshToken: String!
+        token-expiresIn: String!
+    }
     type Query {
         hello: String,
         books: [Book!]!
@@ -35,7 +40,7 @@ module.exports = gql`
         updateBook(id: ID!, title: String!): Book!
         deleteBook(id: ID!): Boolean!
         signUp(username: String!, email: String!, password: String!): String!
-        signIn(username: String!, email: String!, password: String!): String!
+        signIn(username: String!, email: String!, password: String!): Token!
         toggleFavorite(id: ID!): Book!
     }
 `;
